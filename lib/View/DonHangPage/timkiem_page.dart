@@ -9,6 +9,7 @@ class TimKiemPage extends StatefulWidget {
 }
 
 class _TimKiemPageState extends State<TimKiemPage> {
+  TextEditingController txtTimKiem = TextEditingController();
   String _selectedItem = "Tất cả";
   bool _isMultiSelected = false;
 
@@ -34,6 +35,7 @@ class _TimKiemPageState extends State<TimKiemPage> {
                 height: 40,
                 child: Center(
                   child: TextField(
+                    controller: txtTimKiem,
                     decoration: const InputDecoration(
                       hintText: 'Tìm kiếm sản phẩm',
                       prefixIcon: Icon(Icons.search),
@@ -70,46 +72,53 @@ class _TimKiemPageState extends State<TimKiemPage> {
                   ],
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                ),
-                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      width: 130,
-                      child: const CircularProgressIndicator(),
-                    ),
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          RichText(
-                              text:
-                                  const TextSpan(style: TextStyle(color: Colors.black), text: "tenSanaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPham")),
-                          const SizedBox(height: 20),
-                          const Text(
-                            "widget.moTa",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: const [
-                              Text("99999" + " VNĐ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              Spacer(),
-                              Text("Quantily: 10", style: TextStyle(fontWeight: FontWeight.bold))
-                            ],
-                          )
-                        ],
+              ListView.separated(
+                shrinkWrap: true, //tranh' loi~ view SingleChildScrollView-column
+                //ngan chan ListView no' cuon xuong' duoc, xai` cho SingleChildScrollView-column
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                separatorBuilder: (context, index) => const Divider(height: 5),
+                itemBuilder: (context, index) => Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                  ),
+                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        width: 130,
+                        child: const CircularProgressIndicator(),
                       ),
-                    ))
-                  ],
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            RichText(
+                                text: const TextSpan(
+                                    style: TextStyle(color: Colors.black), text: "tenSanaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPham")),
+                            const SizedBox(height: 20),
+                            const Text(
+                              "widget.moTa",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            const SizedBox(height: 20),
+                            Row(
+                              children: const [
+                                Text("99999" + " VNĐ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                Spacer(),
+                                Text("Quantily: 10", style: TextStyle(fontWeight: FontWeight.bold))
+                              ],
+                            )
+                          ],
+                        ),
+                      ))
+                    ],
+                  ),
                 ),
               ),
             ])),
