@@ -13,3 +13,7 @@ export 'View/home_page.dart';
 //export 'View/Pages/wellcome_page.dart';
 //View/BottomPage
 export 'View/BottomPage/tongquan_page.dart';
+export 'View/BottomPage/donhang_page.dart';
+//View/DonHangPage
+export 'View/DonHangPage/them_donhang_page.dart';
+export 'View/DonHangPage/timkiem_page.dart';

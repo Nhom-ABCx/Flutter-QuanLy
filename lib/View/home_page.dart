@@ -14,7 +14,7 @@ class HomePageState extends State<HomePage> {
   int currentIndexBottomNav = 0;
   final List<Widget> _widgetPage = [
     const TongQuanPage(),
-    const TongQuanPage(),
+    const DonHangPage(),
     const TongQuanPage(),
   ];
 
