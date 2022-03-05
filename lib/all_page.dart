@@ -1,13 +1,20 @@
 //chu yeu' import 1 lan` file nay` cho de~
 //API
 export 'API/api_manager.dart';
+export 'API/database.dart';
 //Widgets
 export 'Widgets/drawer.dart';
 export 'Widgets/build_widgets.dart';
 //Models
-//export 'Models/san_pham.dart';
+export 'Model/category.dart';
+export 'Model/customer.dart';
+export 'Model/product.dart';
+export 'Model/sellout.dart';
+export 'Model/sellout_detail.dart';
+export 'Model/shop.dart';
 //Controller
 export 'Controller/home_controller.dart';
+export 'Controller/product_controller.dart';
 //View
 export 'View/home_page.dart';
 //export 'View/Pages/wellcome_page.dart';

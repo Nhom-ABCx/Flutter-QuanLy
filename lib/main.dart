@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => HomeController()),
+          ChangeNotifierProvider(create: (_) => ProductController()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false, //tat cai' debug tren appbar

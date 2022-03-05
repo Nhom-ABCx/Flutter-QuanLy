@@ -1,6 +1,6 @@
 import 'sellout_detail.dart';
 import 'shop.dart';
-import 'Customer.dart';
+import 'customer.dart';
 
 class SellOut {
   int? id;

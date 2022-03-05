@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Database {
   final String sanPham1 = '''
 {
@@ -55,6 +57,10 @@ class Database {
     }
 }
 ''';
+  late final String allSanPham;
+  Database() {
+    allSanPham = "[$sanPham1,$sanPham2,$sanPham3,$sanPham4]";
+  }
 
   final String donHang1 = '''
 {
@@ -160,4 +166,27 @@ class Database {
     ]
 }
 ''';
+}
+
+class Http {
+  int secondGet = 1;
+  Future<Responsee> get(String url, {Map<String, String>? headers}) {
+    //day la` gia? lap neu' la dia chi nao` thi return ve json do'
+    switch (url) {
+      case "/getProduct":
+        return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, Database().allSanPham));
+      default:
+        return Future.delayed(Duration(seconds: secondGet), () => Responsee(500, ""));
+    }
+  }
+
+  Future<Responsee> post(String url, {Map<String, String>? headers, Object? body, Encoding? encoding}) {
+    return Future.delayed(Duration(seconds: secondGet), () => Responsee(500, ""));
+  }
+}
+
+class Responsee {
+  late int statusCode = 200;
+  late String body;
+  Responsee(this.statusCode, this.body);
 }
