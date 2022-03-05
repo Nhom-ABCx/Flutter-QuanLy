@@ -74,7 +74,7 @@ class _TimKiemPageState extends State<TimKiemPage> {
                   ),
                 ),
                 FutureBuilder<List<Product>>(
-                    future: productController.getData(txtTimKiem.text),
+                    future: productController.getData(txtTimKiem.text, _selectedItem),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -88,49 +88,52 @@ class _TimKiemPageState extends State<TimKiemPage> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: snapshot.data!.length,
                               separatorBuilder: (context, index) => const Divider(height: 5),
-                              itemBuilder: (context, index) => Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                                ),
-                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      width: 130,
-                                      child: Image.asset("assets/images/${snapshot.data![index].imagePath}"),
+                              itemBuilder: (context, index) => GestureDetector(
+                                  onTap: () => Navigator.of(context).pop(snapshot.data![index]),
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                                     ),
-                                    Expanded(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: [
-                                          RichText(
-                                              text: TextSpan(style: const TextStyle(color: Colors.black), text: snapshot.data![index].productName)),
-                                          const SizedBox(height: 20),
-                                          const Text(
-                                            "mô tả gì gì đó đó",
-                                            style: TextStyle(color: Colors.grey),
-                                          ),
-                                          const SizedBox(height: 20),
-                                          Row(
+                                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(10),
+                                          width: 130,
+                                          child: Image.asset("assets/images/${snapshot.data![index].imagePath}"),
+                                        ),
+                                        Expanded(
+                                            child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
-                                              Text(formatNumber.format(snapshot.data![index].price) + " VNĐ",
-                                                  style: const TextStyle(fontWeight: FontWeight.bold)),
-                                              const Spacer(),
-                                              Text("Số lượng tồn: ${snapshot.data![index].stock}",
-                                                  style: const TextStyle(fontWeight: FontWeight.bold))
+                                              RichText(
+                                                  text:
+                                                      TextSpan(style: const TextStyle(color: Colors.black), text: snapshot.data![index].productName)),
+                                              const SizedBox(height: 20),
+                                              const Text(
+                                                "mô tả gì gì đó đó",
+                                                style: TextStyle(color: Colors.grey),
+                                              ),
+                                              const SizedBox(height: 20),
+                                              Row(
+                                                children: [
+                                                  Text(formatNumber.format(snapshot.data![index].price) + " VNĐ",
+                                                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                                                  const Spacer(),
+                                                  Text("Số lượng tồn: ${snapshot.data![index].stock}",
+                                                      style: const TextStyle(fontWeight: FontWeight.bold))
+                                                ],
+                                              )
                                             ],
-                                          )
-                                        ],
-                                      ),
-                                    ))
-                                  ],
-                                ),
-                              ),
+                                          ),
+                                        ))
+                                      ],
+                                    ),
+                                  )),
                             )
                           : const Center(
                               child: CircularProgressIndicator(),
