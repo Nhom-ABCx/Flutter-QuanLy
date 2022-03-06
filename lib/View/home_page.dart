@@ -15,7 +15,7 @@ class HomePageState extends State<HomePage> {
   final List<Widget> _widgetPage = [
     const TongQuanPage(),
     const DonHangPage(),
-    const TongQuanPage(),
+    Container(),
   ];
 
   @override

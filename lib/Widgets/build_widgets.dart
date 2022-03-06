@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 final formatNumber = NumberFormat("#,##0", "en_US");
-
+//noi viet may cai ham` tong?
 Widget itemMenuWidget({required BuildContext context, required Widget child}) => Container(
       margin: const EdgeInsets.only(top: 10),
       width: MediaQuery.of(context).size.width / 2.2,

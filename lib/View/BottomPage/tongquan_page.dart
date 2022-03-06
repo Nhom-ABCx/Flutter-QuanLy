@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quanly/all_page.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TongQuanPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class _TongQuanPageState extends State<TongQuanPage> {
     start: DateTime.now().subtract(const Duration(days: 7)),
     end: DateTime.now(),
   );
+  //du lieu ao? chua xu ly'
   List<_SalesData> data = [
     _SalesData((DateTime.now().year - 4).toString(), 40),
     _SalesData((DateTime.now().year - 3).toString(), 32),
@@ -21,6 +23,32 @@ class _TongQuanPageState extends State<TongQuanPage> {
     _SalesData((DateTime.now().year - 1).toString(), 28),
     _SalesData(DateTime.now().year.toString(), 35),
   ];
+  int tongSoDonHang = 0;
+  int tongDoanhThu = 0;
+  int tongKhachHang = 0;
+  void init() {
+    Provider.of<HomeController>(context, listen: false).getData().then((value) {
+      List<String> listKhachHang = [];
+      value.forEach((element) {
+        tongDoanhThu += element.amount!;
+        listKhachHang.add(element.customerMobile!); //den' xem so' khach' hang` dat mua dua theo cai' sdt
+      });
+      setState(() {
+        tongSoDonHang = value.length;
+        tongDoanhThu = tongDoanhThu; //gan' lai de no setState lai thoi
+        tongKhachHang = listKhachHang.toSet().length; //neu' trung` nhau thi` loai bo?, xong tra ve` do dai`
+      });
+      return value;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -41,7 +69,7 @@ class _TongQuanPageState extends State<TongQuanPage> {
                 subtitle: Text("${DateFormat('dd/MM/yyyy').format(dateTimeRange.start)} - ${DateFormat('dd/MM/yyyy').format(dateTimeRange.end)}"),
                 trailing: IconButton(
                   iconSize: 30,
-                  icon: const Icon(Icons.date_range),
+                  icon: const Icon(Icons.date_range, color: Colors.blue),
                   onPressed: () async {
                     final result = await showDateRangePicker(
                       context: context,
@@ -59,35 +87,47 @@ class _TongQuanPageState extends State<TongQuanPage> {
               children: [
                 itemMenuWidget(
                     context: context,
-                    child: const ListTile(
-                      title: Text("Doanh thu"),
-                      subtitle: Text("123"),
-                      trailing: Icon(Icons.money),
+                    child: ListTile(
+                      title: const Text("Doanh thu"),
+                      subtitle: Text(
+                        formatNumber.format(tongDoanhThu) + " VNĐ",
+                        style: const TextStyle(color: Colors.green),
+                      ),
+                      trailing: const Icon(Icons.money),
                     )),
                 itemMenuWidget(
                     context: context,
-                    child: const ListTile(
-                      title: Text("Số đơn hàng"),
-                      subtitle: Text("123"),
-                      trailing: Icon(Icons.shopping_cart),
+                    child: ListTile(
+                      title: const Text("Số đơn hàng"),
+                      subtitle: Text(
+                        "$tongSoDonHang",
+                        style: const TextStyle(color: Colors.green),
+                      ),
+                      trailing: const Icon(Icons.shopping_cart),
                     )),
                 itemMenuWidget(
                     context: context,
                     child: const ListTile(
                       title: Text("Đã hủy"),
-                      subtitle: Text("123"),
+                      subtitle: Text(
+                        "0",
+                        style: const TextStyle(color: Colors.green),
+                      ),
                       trailing: Icon(Icons.dangerous_rounded),
                     )),
                 itemMenuWidget(
                     context: context,
-                    child: const ListTile(
-                      title: Text("Khách hàng"),
-                      subtitle: Text("123"),
-                      trailing: Icon(Icons.people),
+                    child: ListTile(
+                      title: const Text("Khách hàng"),
+                      subtitle: Text(
+                        "$tongKhachHang",
+                        style: const TextStyle(color: Colors.green),
+                      ),
+                      trailing: const Icon(Icons.people),
                     )),
               ],
             ),
-            //phan` nay` la` tham khao tu` giao dien, build theo
+            //phan` nay` la` tham khao tu` giao dien, build theo de danh` phat trien? do` an'
             Container(
               margin: const EdgeInsets.only(top: 10),
               width: MediaQuery.of(context).size.width,
@@ -129,7 +169,7 @@ class _TongQuanPageState extends State<TongQuanPage> {
                         yValueMapper: (_SalesData sales, _) => sales.sales,
                         name: 'Sales',
                         // Enable data label
-                        dataLabelSettings: DataLabelSettings(isVisible: true))
+                        dataLabelSettings: const DataLabelSettings(isVisible: true))
                   ]),
             ),
           ])),

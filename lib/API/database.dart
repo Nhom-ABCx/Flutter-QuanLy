@@ -58,19 +58,19 @@ class Database {
 }
 ''';
   late final String allSanPham;
+  late final String allDonHang;
+  //phuong thuc khoi tao
   Database() {
     allSanPham = "[$sanPham1,$sanPham2,$sanPham3,$sanPham4]";
+    allDonHang = "[$donHang1,$donHang2]";
   }
 
   final String donHang1 = '''
 {
     "id": 1,
     "customerId": 1,
-    "customer": {
-        "id": 1,
-        "customerName": "Thắng",
-        "customerMobile": "0908185626"
-    },
+    "customerName": "Thắng",
+    "customerMobile": "0908185626",
     "shopId": 1,
     "shop": {
         "id": 1,
@@ -108,11 +108,8 @@ class Database {
 {
     "id": 2,
     "customerId": 2,
-    "customer": {
-        "id": 2,
-        "customerName": "Quốc",
-        "customerMobile": "0905591500"
-    },
+    "customerName": "Quốc",
+    "customerMobile": "0905591500",
     "shopId": 2,
     "shop": {
         "id": 2,
@@ -169,12 +166,14 @@ class Database {
 }
 
 class Http {
-  int secondGet = 1;
+  int secondGet = 1; //gia lap 1 giay de lay du lieu
   Future<Responsee> get(String url, {Map<String, String>? headers}) {
     //day la` gia? lap neu' la dia chi nao` thi return ve json do'
     switch (url) {
       case "/getProduct":
         return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, Database().allSanPham));
+      case "/getSellout":
+        return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, Database().allDonHang));
       default:
         return Future.delayed(Duration(seconds: secondGet), () => Responsee(500, ""));
     }

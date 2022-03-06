@@ -23,7 +23,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
       final value = await Navigator.push(
         context,
         MaterialPageRoute<Product>(
-          builder: (context) => const TimKiemPage(),
+          builder: (context) => const SanPhamPage(),
         ),
       );
       if (value == null) return;
@@ -215,12 +215,14 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                 width: MediaQuery.of(context).size.width,
                 child: ListTile(
                   leading: const Icon(Icons.person),
-                  title: const Text(
-                    "Thêm khách hàng",
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                  title: const Text("Thêm khách hàng", style: TextStyle(color: Colors.blue)),
                   onTap: () {
-                    print("object");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<Product>(
+                        builder: (context) => const KhachHangPage(),
+                      ),
+                    );
                   },
                 ),
               ),

@@ -1,11 +1,10 @@
 import 'sellout_detail.dart';
 import 'shop.dart';
-import 'customer.dart';
 
 class SellOut {
   int? id;
-  int? customerId;
-  Customer? customer;
+  String? customerName;
+  String? customerMobile;
   int? shopId;
   Shop? shop;
   int? billSeri;
@@ -16,8 +15,8 @@ class SellOut {
 
   SellOut(
       {this.id,
-      this.customerId,
-      this.customer,
+      this.customerName,
+      this.customerMobile,
       this.shopId,
       this.shop,
       this.billSeri,
@@ -28,8 +27,8 @@ class SellOut {
 
   SellOut.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    customerId = json['customerId'];
-    customer = json['customer'] != null ? Customer.fromJson(json['customer']) : null;
+    customerName = json['customerName'];
+    customerMobile = json['customerMobile'];
     shopId = json['shopId'];
     shop = json['shop'] != null ? Shop.fromJson(json['shop']) : null;
     billSeri = json['billSeri'];
@@ -47,10 +46,8 @@ class SellOut {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['customerId'] = customerId;
-    if (customer != null) {
-      data['customer'] = customer!.toJson();
-    }
+    data['customerName'] = customerName;
+    data['customerMobile'] = customerMobile;
     data['shopId'] = shopId;
     if (shop != null) {
       data['shop'] = shop!.toJson();

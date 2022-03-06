@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'all_page.dart'; //lam` v cho no' nho? ra
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
           ),
           home: const HomePage(),
-          builder: EasyLoading.init(),
+          //builder: EasyLoading.init(),
         ),
       );
 }

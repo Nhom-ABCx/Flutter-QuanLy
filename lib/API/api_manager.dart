@@ -25,3 +25,19 @@ Future<List<Product>> apiGetProduct(String txtTimKiem, String categoryTimKiem) a
 
   return lst;
 }
+
+Future<List<SellOut>> apiGetSellout() async {
+  List<SellOut> lst = [];
+  try {
+    final response = await Http().get("/getSellout");
+    if (response.statusCode == 200) {
+      List jsonRaw = json.decode(response.body);
+      lst = jsonRaw.map((data) => SellOut.fromJson(data)).toList();
+    } else {
+      throw Exception("Something get wrong! Status code ${response.statusCode}");
+    }
+    // ignore: empty_catches
+  } catch (e) {}
+
+  return lst;
+}
