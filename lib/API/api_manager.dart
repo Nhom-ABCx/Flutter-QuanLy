@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import '../all_page.dart';
 
-Future<List<Product>> apiGetProduct(String txtTimKiem, String categoryTimKiem) async {
+Future<List<Product>> apiGetProduct(String txtTimKiem, [String categoryTimKiem = "Tất cả"]) async {
   List<Product> lst = [];
   try {
     final response = await Http().get("/getProduct");

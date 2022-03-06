@@ -19,7 +19,7 @@ class _ProductPageState extends State<ProductPage> {
     return SafeArea(
         child: GestureDetector(
       //huy keyboard khi bam ngoai man hinh
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
         //Hide
         //drawer: const NavigationDrawer(),

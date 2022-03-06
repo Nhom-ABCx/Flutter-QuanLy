@@ -26,6 +26,8 @@ class _TongQuanPageState extends State<TongQuanPage> {
   int tongSoDonHang = 0;
   int tongDoanhThu = 0;
   int tongKhachHang = 0;
+  int tongTonKho = 0;
+  int giaTriTonKho = 0;
   void init() {
     Provider.of<HomeController>(context, listen: false).getData().then((value) {
       List<int> listKhachHang = [];
@@ -35,8 +37,18 @@ class _TongQuanPageState extends State<TongQuanPage> {
       });
       setState(() {
         tongSoDonHang = value.length;
-        tongDoanhThu = tongDoanhThu; //gan' lai de no setState lai thoi
+        tongDoanhThu;
         tongKhachHang = listKhachHang.toSet().length; //neu' trung` nhau thi` loai bo?, xong tra ve` do dai`
+      });
+      return value;
+    });
+    Provider.of<ProductController>(context, listen: false).getData("").then((value) {
+      value.forEach((element) {
+        tongTonKho += element.stock!;
+        giaTriTonKho += element.stock! * element.price!;
+      });
+      setState(() {
+        tongTonKho;
       });
       return value;
     });
@@ -111,7 +123,7 @@ class _TongQuanPageState extends State<TongQuanPage> {
                       title: Text("Đã hủy"),
                       subtitle: Text(
                         "0",
-                        style: const TextStyle(color: Colors.green),
+                        style: TextStyle(color: Colors.green),
                       ),
                       trailing: Icon(Icons.dangerous_rounded),
                     )),
@@ -133,19 +145,19 @@ class _TongQuanPageState extends State<TongQuanPage> {
               width: MediaQuery.of(context).size.width,
               decoration: customContainerDeco(),
               child: Column(
-                children: const [
-                  Text("Thông tin kho"),
-                  ListTile(
+                children: [
+                  const Text("Thông tin kho"),
+                  const ListTile(
                     title: Text("Sản phẩm dưới định mức"),
                     trailing: Text("0"),
                   ),
                   ListTile(
-                    title: Text("Số tồn kho"),
-                    trailing: Text("0"),
+                    title: const Text("Số tồn kho"),
+                    trailing: Text("$tongTonKho"),
                   ),
                   ListTile(
-                    title: Text("Giá trị tồn kho"),
-                    trailing: Text("0"),
+                    title: const Text("Giá trị tồn kho"),
+                    trailing: Text(formatNumber.format(giaTriTonKho) + " VNĐ"),
                   ),
                 ],
               ),

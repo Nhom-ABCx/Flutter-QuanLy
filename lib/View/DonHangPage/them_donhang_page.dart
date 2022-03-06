@@ -20,7 +20,6 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
   @override
   Widget build(BuildContext context) {
     Future<void> _chuyenDenTrangTimKiem() async {
-      FocusScope.of(context).unfocus(); //unforcus lai de mat cai ban` phim'
       //tao 1 bien nhan gia tri tu trang tiep theo gui ve`
       final value = await Navigator.push(
         context,
@@ -28,6 +27,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
           builder: (context) => const ProductPage(),
         ),
       );
+      FocusScope.of(context).requestFocus(FocusNode());
       if (value == null) return;
       bool daCo = false;
       lstProduct.forEach((element) {
@@ -55,7 +55,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
     return SafeArea(
         child: GestureDetector(
       //huy keyboard khi bam ngoai man hinh
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
         //Hide
         //drawer: const NavigationDrawer(),
