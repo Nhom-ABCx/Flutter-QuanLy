@@ -1,6 +1,8 @@
+import '../all_page.dart';
+import 'package:sqflite/sqflite.dart';
 import 'dart:convert';
 
-class Database {
+class DB {
   final String sanPham1 = '''
 {
     "id": 1,
@@ -57,20 +59,15 @@ class Database {
     }
 }
 ''';
-  late final String allSanPham;
-  late final String allDonHang;
-  //phuong thuc khoi tao
-  Database() {
-    allSanPham = "[$sanPham1,$sanPham2,$sanPham3,$sanPham4]";
-    allDonHang = "[$donHang1,$donHang2]";
-  }
-
   final String donHang1 = '''
 {
     "id": 1,
     "customerId": 1,
-    "customerName": "Thắng",
-    "customerMobile": "0908185626",
+    "customer": {
+        "id": 1,
+        "customerName": "Thắng",
+        "customerMobile": "0908185626"
+    },
     "shopId": 1,
     "shop": {
         "id": 1,
@@ -108,8 +105,11 @@ class Database {
 {
     "id": 2,
     "customerId": 2,
-    "customerName": "Quốc",
-    "customerMobile": "0905591500",
+    "customer": {
+        "id": 2,
+        "customerName": "Quốc",
+        "customerMobile": "0905591500"
+    },
     "shopId": 2,
     "shop": {
         "id": 2,
@@ -163,6 +163,51 @@ class Database {
     ]
 }
 ''';
+  late final String allSanPham;
+  late final String allDonHang;
+  //phuong thuc khoi tao
+  DB() {
+    allSanPham = "[$sanPham1,$sanPham2,$sanPham3,$sanPham4]";
+    allDonHang = "[$donHang1,$donHang2]";
+  }
+
+//local DB
+  static final DB instance = DB._init();
+
+  static Database? _db;
+  DB._init();
+
+  Future<Database> get database async {
+    if (_db != null) {
+      // getAccount();
+      return _db!;
+    }
+
+    return _db = await initDatabase();
+  }
+
+  initDatabase() async {
+    // io.Directory documentDirectory = await getApplicationDocumentsDirectory();
+    // String path = join(documentDirectory.path, 'cart.db');
+    String path = "DB/local.db";
+    var db = await openDatabase(path, version: 1, onCreate: _onCreate);
+    // await deleteDatabase(path);
+
+    return db;
+  }
+
+  Future<void> _onCreate(Database db, int version) async {
+    // await db.execute("DROP TABLE IF EXISTS cart");
+
+    await db.execute(''' CREATE TABLE Customer(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      customerName TEXT, 
+      customerMobile TEXT
+      )
+        ''');
+    db.insert("Customer", {"id": 1, "customerName": "Thắng", "customerMobile": "0908185626"});
+    db.insert("Customer", {"id": 2, "customerName": "Quốc", "customerMobile": "0905591500"});
+  }
 }
 
 class Http {
@@ -171,9 +216,9 @@ class Http {
     //day la` gia? lap neu' la dia chi nao` thi return ve json do'
     switch (url) {
       case "/getProduct":
-        return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, Database().allSanPham));
+        return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, DB().allSanPham));
       case "/getSellout":
-        return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, Database().allDonHang));
+        return Future.delayed(Duration(seconds: secondGet), () => Responsee(200, DB().allDonHang));
       default:
         return Future.delayed(Duration(seconds: secondGet), () => Responsee(500, ""));
     }

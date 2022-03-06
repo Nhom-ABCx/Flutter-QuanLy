@@ -28,10 +28,10 @@ class _TongQuanPageState extends State<TongQuanPage> {
   int tongKhachHang = 0;
   void init() {
     Provider.of<HomeController>(context, listen: false).getData().then((value) {
-      List<String> listKhachHang = [];
+      List<int> listKhachHang = [];
       value.forEach((element) {
         tongDoanhThu += element.amount!;
-        listKhachHang.add(element.customerMobile!); //den' xem so' khach' hang` dat mua dua theo cai' sdt
+        listKhachHang.add(element.customerId!); //den' xem so' khach' hang`
       });
       setState(() {
         tongSoDonHang = value.length;

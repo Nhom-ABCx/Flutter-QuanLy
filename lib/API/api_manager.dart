@@ -9,13 +9,13 @@ Future<List<Product>> apiGetProduct(String txtTimKiem, String categoryTimKiem) a
     if (response.statusCode == 200) {
       List jsonRaw = json.decode(response.body);
       lst = jsonRaw.map((data) => Product.fromJson(data)).where((element) {
-        final nameLower = element.productName!.toLowerCase(); //chuyen cai ten thanh chu thuong` het
-        final queryLower = txtTimKiem.toLowerCase();
-        return nameLower.contains(queryLower); //tra ve ton` tai
-      }).where((element) {
         final nameLower = element.category!.categoryName!.toLowerCase();
         final queryLower = (categoryTimKiem == "Tất cả") ? "" : categoryTimKiem.toLowerCase();
         return nameLower.contains(queryLower);
+      }).where((element) {
+        final nameLower = element.productName!.toLowerCase(); //chuyen cai ten thanh chu thuong` het
+        final queryLower = txtTimKiem.toLowerCase();
+        return nameLower.contains(queryLower); //tra ve ton` tai
       }).toList();
     } else {
       throw Exception("Something get wrong! Status code ${response.statusCode}");

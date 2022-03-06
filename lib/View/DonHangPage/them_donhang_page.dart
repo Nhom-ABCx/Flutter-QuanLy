@@ -14,6 +14,8 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
   List<Product> lstProduct = [];
   int tongSoLuong = 0;
   int tongTien = 0;
+  Customer _customer = Customer(customerName: "", customerMobile: "");
+  String ghiChu = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
       final value = await Navigator.push(
         context,
         MaterialPageRoute<Product>(
-          builder: (context) => const SanPhamPage(),
+          builder: (context) => const ProductPage(),
         ),
       );
       if (value == null) return;
@@ -215,14 +217,17 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                 width: MediaQuery.of(context).size.width,
                 child: ListTile(
                   leading: const Icon(Icons.person),
-                  title: const Text("Thêm khách hàng", style: TextStyle(color: Colors.blue)),
-                  onTap: () {
-                    Navigator.push(
+                  title: Text(_customer.customerName!.isEmpty ? "Thêm khách hàng" : _customer.customerName! + " - " + _customer.customerMobile!,
+                      style: const TextStyle(color: Colors.blue)),
+                  onTap: () async {
+                    final result = await Navigator.push(
                       context,
-                      MaterialPageRoute<Product>(
-                        builder: (context) => const KhachHangPage(),
+                      MaterialPageRoute<Customer>(
+                        builder: (context) => const CustomerPage(),
                       ),
                     );
+                    if (result == null) return;
+                    setState(() => _customer = result);
                   },
                 ),
               ),
@@ -235,9 +240,50 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                   trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_right, size: 30)),
                 ),
               ),
-              const SizedBox(
-                height: 110,
-              )
+              const Divider(),
+              Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  ListTile(
+                    leading: const Icon(Icons.edit),
+                    title: const Text("Ghi chú", style: TextStyle(color: Colors.blue)),
+                    onTap: () async {
+                      final txtTenController = TextEditingController();
+                      final result = await showDialog<String>(
+                          //barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: const Text("Thêm khách hàng"),
+                                content: TextFormField(
+                                  autofocus: true,
+                                  controller: txtTenController, //gan gia tri cua text vao bien'
+                                  decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.edit),
+                                    border: UnderlineInputBorder(),
+                                    labelText: "Thêm ghi chú",
+                                  ),
+                                ),
+                                actions: [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton(
+                                      onPressed: () => Navigator.of(context).pop(txtTenController.text),
+                                      child: const Text("Thêm"),
+                                    ),
+                                  )
+                                ],
+                              ));
+                      setState(() => ghiChu = result!);
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: RichText(text: TextSpan(style: const TextStyle(color: Colors.black), text: ghiChu)),
+                  ),
+                ]),
+              ),
+              const SizedBox(height: 110)
             ])),
           ],
         ),
@@ -248,16 +294,16 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                   width: MediaQuery.of(context).size.width,
                   height: 110,
                   child: Column(children: [
-                    const ListTile(
-                      title: Text("Tạm tính"),
-                      trailing: Text("0"),
+                    ListTile(
+                      title: const Text("Tạm tính"),
+                      trailing: Text(formatNumber.format(tongTien) + " VNĐ"),
                     ),
                     ElevatedButton(
                         onPressed: () async {},
                         child: SizedBox(
                             width: MediaQuery.of(context).size.width - 50,
                             child: const Text(
-                              "Tạo đơn hàng",
+                              "Lập hóa đơn",
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                             )),

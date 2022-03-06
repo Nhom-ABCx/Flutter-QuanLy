@@ -3,13 +3,13 @@ import 'package:flutter_quanly/all_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class SanPhamPage extends StatefulWidget {
-  const SanPhamPage({Key? key}) : super(key: key);
+class ProductPage extends StatefulWidget {
+  const ProductPage({Key? key}) : super(key: key);
   @override
-  State<SanPhamPage> createState() => _SanPhamPageState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
-class _SanPhamPageState extends State<SanPhamPage> {
+class _ProductPageState extends State<ProductPage> {
   TextEditingController txtTimKiem = TextEditingController();
   String _selectedItem = "Tất cả";
   bool _isMultiSelected = false;
