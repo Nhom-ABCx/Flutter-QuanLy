@@ -40,7 +40,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                                 hintText: 'Tìm kiếm sản phẩm',
                                 prefixIcon: Icon(Icons.search),
                               ),
-                              onTap: () => cartController.chuyenDenTrangTimKiem(context),
+                              onTap: () => cartController.chuyenDenTrangProduct(context),
                             ),
                           ),
                         ),
@@ -50,7 +50,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                         delegate: SliverChildListDelegate([
                       (cartController.lstCartProduct.isEmpty)
                           ? GestureDetector(
-                              onTap: () => cartController.chuyenDenTrangTimKiem(context),
+                              onTap: () => cartController.chuyenDenTrangProduct(context),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: Column(

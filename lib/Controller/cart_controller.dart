@@ -6,22 +6,13 @@ class CartController extends ChangeNotifier {
   List<Product> lstCartProduct = [];
   int tongSoLuong = 0;
   int tongTien = 0;
-  Customer customer = Customer(customerName: "", customerMobile: "");
+  Customer customer = Customer(customerName: "Khách lẻ", customerMobile: "");
   String ghiChu = "";
 
-  Future<void> chuyenDenTrangTimKiem(BuildContext context) async {
-    //tao 1 bien nhan gia tri tu trang tiep theo gui ve`
-    final value = await Navigator.push(
-      context,
-      MaterialPageRoute<Product>(
-        builder: (context) => const ProductPage(),
-      ),
-    );
-    FocusScope.of(context).requestFocus(FocusNode());
-    if (value == null) return;
+  void themSanPhamVaoCart(Product _product) {
     bool daCo = false;
     lstCartProduct.forEach((element) {
-      if (value.id == element.id) {
+      if (_product.id == element.id) {
         element.stock = element.stock! + 1;
         tongSoLuong += 1;
         tongTien += element.price!;
@@ -31,13 +22,25 @@ class CartController extends ChangeNotifier {
       }
     });
     if (!daCo) {
-      value.stock = 1;
+      _product.stock = 1;
 
-      lstCartProduct.add(value);
-      tongSoLuong += value.stock!;
-      tongTien += value.price!;
+      lstCartProduct.add(_product);
+      tongSoLuong += _product.stock!;
+      tongTien += _product.price!;
     }
-    print("dsProduct ${lstCartProduct.length}");
+  }
+
+  Future<void> chuyenDenTrangProduct(BuildContext context) async {
+    //tao 1 bien nhan gia tri tu trang tiep theo gui ve`
+    final value = await Navigator.push(
+      context,
+      MaterialPageRoute<Product>(
+        builder: (context) => const ProductPage(),
+      ),
+    );
+    FocusScope.of(context).requestFocus(FocusNode());
+    if (value == null) return;
+    themSanPhamVaoCart(value);
   }
 
   void giamSoLuong(int index) {

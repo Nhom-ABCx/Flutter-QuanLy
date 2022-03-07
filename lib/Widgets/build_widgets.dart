@@ -14,3 +14,13 @@ Decoration customContainerDeco() => const BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
     boxShadow: [BoxShadow(blurRadius: 3, color: Colors.grey, offset: Offset(1, 2))]);
+
+void thongBaoScaffoldMessenger(BuildContext context, String text) {
+  ScaffoldMessenger.of(context)
+    ..removeCurrentSnackBar()
+    ..showSnackBar(SnackBar(
+        content: Text(
+      text,
+      textAlign: TextAlign.center,
+    )));
+}

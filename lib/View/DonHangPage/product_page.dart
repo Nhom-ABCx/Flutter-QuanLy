@@ -50,6 +50,7 @@ class _ProductPageState extends State<ProductPage> {
                     children: [
                       const Text("Chọn nhiều"),
                       Switch(
+                          activeColor: Colors.blue,
                           value: _isMultiSelected,
                           onChanged: (value) {
                             setState(() => _isMultiSelected = value);
@@ -79,7 +80,15 @@ class _ProductPageState extends State<ProductPage> {
                                 itemCount: snapshot.data!.length,
                                 separatorBuilder: (context, index) => const Divider(height: 5),
                                 itemBuilder: (context, index) => GestureDetector(
-                                    onTap: () => Navigator.of(context).pop(snapshot.data![index]),
+                                    onTap: () {
+                                      if (_isMultiSelected) {
+                                        Provider.of<CartController>(context, listen: false).themSanPhamVaoCart(snapshot.data![index]);
+                                        thongBaoScaffoldMessenger(context,
+                                            "Thêm thành công, tổng SL hiện tại: ${Provider.of<CartController>(context, listen: false).tongSoLuong}");
+                                      } else {
+                                        Navigator.of(context).pop(snapshot.data![index]);
+                                      }
+                                    },
                                     child: Container(
                                       decoration: const BoxDecoration(
                                         color: Colors.white,
