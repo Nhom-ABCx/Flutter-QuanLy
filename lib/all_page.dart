@@ -29,3 +29,4 @@ export 'View/BottomPage/donhang_page.dart';
 export 'View/DonHangPage/them_donhang_page.dart';
 export 'View/DonHangPage/product_page.dart';
 export 'View/DonHangPage/customer_page.dart';
+export 'View/DonHangPage/chitiet_donhang_page.dart';

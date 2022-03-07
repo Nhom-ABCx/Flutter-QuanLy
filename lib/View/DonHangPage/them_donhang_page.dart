@@ -252,7 +252,14 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                               trailing: Text(formatNumber.format(cartController.tongTien) + " VNĐ"),
                             ),
                             ElevatedButton(
-                                onPressed: () async {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) => const ChiTietDonHangPage(),
+                                    ),
+                                  );
+                                },
                                 child: SizedBox(
                                     width: MediaQuery.of(context).size.width - 50,
                                     child: const Text(

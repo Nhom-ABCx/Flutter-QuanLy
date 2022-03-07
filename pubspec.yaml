@@ -37,6 +37,7 @@ dependencies:
   syncfusion_flutter_charts: ^19.4.54
   #hinh anh? theo dang svg
   flutter_svg: ^1.0.3
+  #database tai local
   sqflite: ^2.0.1
 
   # The following adds the Cupertino Icons font to your application.
