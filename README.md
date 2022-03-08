@@ -1,16 +1,11 @@
-# flutter_quanly
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![0](https://user-images.githubusercontent.com/62784077/157233227-afe7c37a-b9b9-404a-a792-e4ea52dffa96.png)
+![1](https://user-images.githubusercontent.com/62784077/157233232-6862c1f9-6d70-41bc-b5c2-4c691c2f4710.png)
+![2](https://user-images.githubusercontent.com/62784077/157233235-defea1df-73b2-4cae-9eba-c5780e57bbd6.png)
+![3](https://user-images.githubusercontent.com/62784077/157233248-15c5f06c-b577-4db5-990c-ba6ceb6659de.png)
+![4](https://user-images.githubusercontent.com/62784077/157233253-e9ccffe6-71ee-46d8-b1fe-f5ede085345b.png)
+![5](https://user-images.githubusercontent.com/62784077/157233258-f3231065-4818-43d6-b36c-ca75f5821137.png)
+![6](https://user-images.githubusercontent.com/62784077/157233267-7d209ce8-4169-4083-b0d0-0f303bd45024.png)
+![7](https://user-images.githubusercontent.com/62784077/157233273-29d4e90c-90be-4281-ac09-0f22ddea4511.png)
+![8](https://user-images.githubusercontent.com/62784077/157233279-4423e6bb-0f10-4674-bd78-82b81f2a7279.png)
+![9](https://user-images.githubusercontent.com/62784077/157233285-b369cee6-bfab-4488-ac93-40ffaa598f67.png)
+![10](https://user-images.githubusercontent.com/62784077/157233292-c9eee32c-41fc-4ce0-a0d0-acd6a1dd0eb0.png)
