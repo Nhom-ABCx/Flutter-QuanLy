@@ -261,7 +261,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                                   );
                                 },
                                 child: SizedBox(
-                                    width: MediaQuery.of(context).size.width - 50,
+                                    width: MediaQuery.of(context).size.width * 0.85,
                                     child: const Text(
                                       "Lập hóa đơn",
                                       textAlign: TextAlign.center,

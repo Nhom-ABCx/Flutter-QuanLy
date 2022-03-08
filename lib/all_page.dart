@@ -7,6 +7,7 @@ export 'DB/database.dart';
 export 'Widgets/drawer.dart';
 export 'Widgets/build_widgets.dart';
 export 'Widgets/search_widget.dart';
+export 'Widgets/process_timeline.dart';
 //Models
 export 'Model/category.dart';
 export 'Model/product.dart';
