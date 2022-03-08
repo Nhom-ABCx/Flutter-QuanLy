@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_quanly/all_page.dart';
+import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 
 class ProcessTimelinePage extends StatefulWidget {
@@ -11,7 +13,6 @@ class ProcessTimelinePage extends StatefulWidget {
 
 class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
   //phan` nay` la` copy tu` code mau~, tu custom, gan' vao`
-
   final _processes = [
     'Đặt hàng',
     'Duyệt',
@@ -27,15 +28,15 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
     Icons.done_all,
   ];
 
-  int _processIndex = 2;
   Color completeColor = const Color(0xff5e6172);
   Color inProgressColor = const Color(0xff5ec792);
   Color todoColor = const Color(0xffd1d2d7);
 
   Color getColor(int index) {
-    if (index == _processIndex) {
+    int processIndex = Provider.of<DonHangController>(context, listen: false).processIndex;
+    if (index == processIndex) {
       return inProgressColor;
-    } else if (index < _processIndex) {
+    } else if (index < processIndex) {
       return completeColor;
     } else {
       return todoColor;
@@ -81,7 +82,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
             indicatorBuilder: (_, index) {
               Color color; //init
               Widget child = const SizedBox(); //init
-              if (index == _processIndex) {
+              if (index == Provider.of<DonHangController>(context, listen: true).processIndex) {
                 color = inProgressColor;
                 child = const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -90,7 +91,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
                     valueColor: AlwaysStoppedAnimation(Colors.white),
                   ),
                 );
-              } else if (index < _processIndex) {
+              } else if (index < Provider.of<DonHangController>(context, listen: true).processIndex) {
                 color = completeColor;
                 child = const Icon(
                   Icons.check,
@@ -101,7 +102,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
                 color = todoColor;
               }
 
-              if (index <= _processIndex) {
+              if (index <= Provider.of<DonHangController>(context, listen: true).processIndex) {
                 return Stack(
                   children: [
                     CustomPaint(
@@ -109,7 +110,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
                       painter: _BezierPainter(
                         color: color,
                         drawStart: index > 0,
-                        drawEnd: index < _processIndex,
+                        drawEnd: index < Provider.of<DonHangController>(context, listen: true).processIndex,
                       ),
                     ),
                     DotIndicator(
@@ -139,7 +140,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
             },
             connectorBuilder: (_, index, type) {
               if (index > 0) {
-                if (index == _processIndex) {
+                if (index == Provider.of<DonHangController>(context, listen: true).processIndex) {
                   final prevColor = getColor(index - 1);
                   final color = getColor(index);
                   List<Color> gradientColors;

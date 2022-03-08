@@ -20,6 +20,7 @@ export 'Controller/home_controller.dart';
 export 'Controller/product_controller.dart';
 export 'Controller/customer_controller.dart';
 export 'Controller/cart_controller.dart';
+export 'Controller/donhang_controller.dart';
 //View
 export 'View/home_page.dart';
 //export 'View/Pages/wellcome_page.dart';

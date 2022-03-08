@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_quanly/all_page.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class ChiTietDonHangPage extends StatefulWidget {
   const ChiTietDonHangPage({Key? key}) : super(key: key);
@@ -104,12 +105,12 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                     ],
                   ),
                 ),
-                ListView.separated(
+                const Divider(height: 5),
+                ListView.builder(
                   shrinkWrap: true, //tranh' loi~ view SingleChildScrollView-column
                   //ngan chan ListView no' cuon xuong' duoc, xai` cho SingleChildScrollView-column
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 2,
-                  separatorBuilder: (context, index) => const Divider(height: 5),
                   itemBuilder: (context, index) => Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -164,12 +165,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                     child: Center(
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) => const ChiTietDonHangPage(),
-                                ),
-                              );
+                              Provider.of<DonHangController>(context, listen: false).chuyenTiepTrangThai();
                             },
                             child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.85,
