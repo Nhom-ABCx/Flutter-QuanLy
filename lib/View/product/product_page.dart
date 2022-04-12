@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quanly/all_page.dart';
+import 'package:flutter_quanly/View/product/product_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+
+import '../../Model/product.dart';
+import '../../Widgets/build_widgets.dart';
+import '../../Widgets/search_widget.dart';
+import '../cart/cart_controller.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -23,8 +28,7 @@ class _ProductPageState extends State<ProductPage> {
       child: Scaffold(
         //Hide
         //drawer: const NavigationDrawer(),
-        body: Consumer<ProductController>(
-          builder: (context, productController, child) => CustomScrollView(
+        body: CustomScrollView(
             slivers: [
               SliverAppBar(
                 centerTitle: true,
@@ -59,7 +63,7 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
                 FutureBuilder<List<Product>>(
-                    future: productController.getData(txtTimKiem.text, _selectedItem),
+                    future: Get.put(ProductController()).getData(txtTimKiem.text, _selectedItem),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -82,9 +86,9 @@ class _ProductPageState extends State<ProductPage> {
                                 itemBuilder: (context, index) => GestureDetector(
                                     onTap: () {
                                       if (_isMultiSelected) {
-                                        Provider.of<CartController>(context, listen: false).themSanPhamVaoCart(snapshot.data![index]);
+                                        Get.put(CartController()).themSanPhamVaoCart(snapshot.data![index]);
                                         thongBaoScaffoldMessenger(context,
-                                            "Thêm thành công, tổng SL hiện tại: ${Provider.of<CartController>(context, listen: false).tongSoLuong}");
+                                            "Thêm thành công, tổng SL hiện tại: ${Get.put(CartController()).tongSoLuong}");
                                       } else {
                                         Navigator.of(context).pop(snapshot.data![index]);
                                       }
@@ -142,7 +146,6 @@ class _ProductPageState extends State<ProductPage> {
               ])),
             ],
           ),
-        ),
       ),
     ));
   }

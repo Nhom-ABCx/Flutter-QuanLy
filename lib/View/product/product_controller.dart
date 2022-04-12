@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import '../all_page.dart';
+import 'package:get/get.dart';
+import '../../API/api_manager.dart';
+import '../../Model/product.dart';
 
-class ProductController extends ChangeNotifier {
+class ProductController extends GetxController {
   List<Product> product = [];
   Future<List<Product>> getData(String txtTimKiem, [String categoryTimKiem = "Tất cả"]) async {
     print("getData");

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quanly/all_page.dart';
 
 class LayOutPage extends StatefulWidget {
   const LayOutPage({Key? key}) : super(key: key);

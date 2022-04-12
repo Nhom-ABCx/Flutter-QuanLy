@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_quanly/all_page.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_quanly/View/donhang/donhang_controller.dart';
+import 'package:get/get.dart';
 import 'package:timelines/timelines.dart';
 
 class ProcessTimelinePage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
   Color todoColor = const Color(0xffd1d2d7);
 
   Color getColor(int index) {
-    int processIndex = Provider.of<DonHangController>(context, listen: false).processIndex;
+    int processIndex = Get.put(DonHangController()).processIndex;
     if (index == processIndex) {
       return inProgressColor;
     } else if (index < processIndex) {
@@ -45,128 +45,130 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        height: 100,
-        color: Colors.white,
-        child: Timeline.tileBuilder(
-          theme: TimelineThemeData(
-            direction: Axis.horizontal,
-            connectorTheme: const ConnectorThemeData(
-              space: 30.0,
-              thickness: 5.0,
-            ),
-          ),
-          builder: TimelineTileBuilder.connected(
-            itemCount: _processes.length,
-            connectionDirection: ConnectionDirection.before,
-            itemExtentBuilder: (_, __) => MediaQuery.of(context).size.width / _processes.length,
-            oppositeContentsBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Icon(_icons[index], color: getColor(index)),
-              );
-            },
-            contentsBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Text(
-                  _processes[index],
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: getColor(index),
-                  ),
+    return GetBuilder<DonHangController>(
+        init: DonHangController(),
+        builder: (donHangController) => Container(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            color: Colors.white,
+            child: Timeline.tileBuilder(
+              theme: TimelineThemeData(
+                direction: Axis.horizontal,
+                connectorTheme: const ConnectorThemeData(
+                  space: 30.0,
+                  thickness: 5.0,
                 ),
-              );
-            },
-            indicatorBuilder: (_, index) {
-              Color color; //init
-              Widget child = const SizedBox(); //init
-              if (index == Provider.of<DonHangController>(context, listen: true).processIndex) {
-                color = inProgressColor;
-                child = const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3.0,
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                  ),
-                );
-              } else if (index < Provider.of<DonHangController>(context, listen: true).processIndex) {
-                color = completeColor;
-                child = const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 15.0,
-                );
-              } else {
-                color = todoColor;
-              }
-
-              if (index <= Provider.of<DonHangController>(context, listen: true).processIndex) {
-                return Stack(
-                  children: [
-                    CustomPaint(
-                      size: const Size(30.0, 30.0),
-                      painter: _BezierPainter(
-                        color: color,
-                        drawStart: index > 0,
-                        drawEnd: index < Provider.of<DonHangController>(context, listen: true).processIndex,
+              ),
+              builder: TimelineTileBuilder.connected(
+                itemCount: _processes.length,
+                connectionDirection: ConnectionDirection.before,
+                itemExtentBuilder: (_, __) => MediaQuery.of(context).size.width / _processes.length,
+                oppositeContentsBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: Icon(_icons[index], color: getColor(index)),
+                  );
+                },
+                contentsBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      _processes[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: getColor(index),
                       ),
                     ),
-                    DotIndicator(
-                      size: 30.0,
-                      color: color,
-                      child: child,
-                    ),
-                  ],
-                );
-              } else {
-                return Stack(
-                  children: [
-                    CustomPaint(
-                      size: const Size(15.0, 15.0),
-                      painter: _BezierPainter(
-                        color: color,
-                        drawEnd: index < _processes.length - 1,
+                  );
+                },
+                indicatorBuilder: (_, index) {
+                  Color color; //init
+                  Widget child = const SizedBox(); //init
+                  if (index == donHangController.processIndex) {
+                    color = inProgressColor;
+                    child = const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        valueColor: AlwaysStoppedAnimation(Colors.white),
                       ),
-                    ),
-                    OutlinedDotIndicator(
-                      borderWidth: 4.0,
-                      color: color,
-                    ),
-                  ],
-                );
-              }
-            },
-            connectorBuilder: (_, index, type) {
-              if (index > 0) {
-                if (index == Provider.of<DonHangController>(context, listen: true).processIndex) {
-                  final prevColor = getColor(index - 1);
-                  final color = getColor(index);
-                  List<Color> gradientColors;
-                  if (type == ConnectorType.start) {
-                    gradientColors = [Color.lerp(prevColor, color, 0.5)!, color];
+                    );
+                  } else if (index < donHangController.processIndex) {
+                    color = completeColor;
+                    child = const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 15.0,
+                    );
                   } else {
-                    gradientColors = [prevColor, Color.lerp(prevColor, color, 0.5)!];
+                    color = todoColor;
                   }
-                  return DecoratedLineConnector(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: gradientColors,
-                      ),
-                    ),
-                  );
-                } else {
-                  return SolidLineConnector(
-                    color: getColor(index),
-                  );
-                }
-              } else {
-                return null;
-              }
-            },
-          ),
-        ));
+
+                  if (index <= donHangController.processIndex) {
+                    return Stack(
+                      children: [
+                        CustomPaint(
+                          size: const Size(30.0, 30.0),
+                          painter: _BezierPainter(
+                            color: color,
+                            drawStart: index > 0,
+                            drawEnd: index < donHangController.processIndex,
+                          ),
+                        ),
+                        DotIndicator(
+                          size: 30.0,
+                          color: color,
+                          child: child,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Stack(
+                      children: [
+                        CustomPaint(
+                          size: const Size(15.0, 15.0),
+                          painter: _BezierPainter(
+                            color: color,
+                            drawEnd: index < _processes.length - 1,
+                          ),
+                        ),
+                        OutlinedDotIndicator(
+                          borderWidth: 4.0,
+                          color: color,
+                        ),
+                      ],
+                    );
+                  }
+                },
+                connectorBuilder: (_, index, type) {
+                  if (index > 0) {
+                    if (index == donHangController.processIndex) {
+                      final prevColor = getColor(index - 1);
+                      final color = getColor(index);
+                      List<Color> gradientColors;
+                      if (type == ConnectorType.start) {
+                        gradientColors = [Color.lerp(prevColor, color, 0.5)!, color];
+                      } else {
+                        gradientColors = [prevColor, Color.lerp(prevColor, color, 0.5)!];
+                      }
+                      return DecoratedLineConnector(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: gradientColors,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return SolidLineConnector(
+                        color: getColor(index),
+                      );
+                    }
+                  } else {
+                    return null;
+                  }
+                },
+              ),
+            )));
   }
 }
 

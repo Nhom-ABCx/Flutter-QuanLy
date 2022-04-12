@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quanly/all_page.dart';
+
+import '../Widgets/build_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

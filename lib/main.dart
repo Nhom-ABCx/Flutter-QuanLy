@@ -1,7 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'all_page.dart'; //lam` v cho no' nho? ra
+import 'package:get/get.dart';
+
+import 'pages.dart';
+import 'routes.dart';
 
 void main() {
   //chinh cai' mau` cua nen` pin
@@ -15,24 +17,15 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => HomeController()),
-          ChangeNotifierProvider(create: (_) => ProductController()),
-          ChangeNotifierProvider(create: (_) => CustomerController()),
-          ChangeNotifierProvider(create: (_) => CartController()),
-          ChangeNotifierProvider(create: (_) => DonHangController()),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false, //tat cai' debug tren appbar
-          title: 'Quan Ly Ban Hang',
-          theme: ThemeData(
-            //brightness: Brightness.dark, //che'do toi' hay sang'
-            scaffoldBackgroundColor: const Color(0xFFEEEEEE),
-            primarySwatch: Colors.green,
-          ),
-          home: const HomePage(),
-          //builder: EasyLoading.init(),
+  Widget build(BuildContext context) => GetMaterialApp(
+        debugShowCheckedModeBanner: false, //tat cai' debug tren appbar
+        title: 'Quan Ly Ban Hang',
+        theme: ThemeData(
+          //brightness: Brightness.dark, //che'do toi' hay sang'
+          scaffoldBackgroundColor: const Color(0xFFEEEEEE),
+          primarySwatch: Colors.green,
         ),
+        initialRoute: Routes.CONTAINER,
+        getPages: routePages,
       );
 }

@@ -1,14 +1,14 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import '../all_page.dart';
+import 'package:get/get.dart';
+import '../../API/db.dart';
+import '../../Model/customer.dart';
 
-class CustomerController extends ChangeNotifier {
+class CustomerController extends GetxController {
   List<Customer> customer = [];
   Future<void> insertCustomer(Customer account) async {
     var dbClient = await DB().database;
     final result = await dbClient.insert('Customer', account.toJson());
     // print("Insert thành công");
-    notifyListeners();
   }
 
   Future<List<Customer>> getData(String txtTimKiem) async {

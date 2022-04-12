@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_quanly/all_page.dart';
+import 'package:flutter_quanly/View/customer/customer_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+
+import '../../Model/customer.dart';
+import '../../Widgets/search_widget.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({Key? key}) : super(key: key);
@@ -22,8 +25,7 @@ class _CustomerPageState extends State<CustomerPage> {
       child: Scaffold(
         //Hide
         //drawer: const NavigationDrawer(),
-        body: Consumer<CustomerController>(
-          builder: (context, customerController, child) => CustomScrollView(
+        body: CustomScrollView(
             slivers: [
               SliverAppBar(
                 centerTitle: true,
@@ -97,7 +99,7 @@ class _CustomerPageState extends State<CustomerPage> {
                                       )
                                     ],
                                   ));
-                          customerController.insertCustomer(Customer(customerName: result![0], customerMobile: result[1]));
+                          Get.put(CustomerController()).insertCustomer(Customer(customerName: result![0], customerMobile: result[1]));
                         },
                         child: const Text(
                           "Thêm mới khách hàng",
@@ -113,7 +115,7 @@ class _CustomerPageState extends State<CustomerPage> {
                           backgroundColor: MaterialStateProperty.all(Colors.pink.shade300),
                         ))),
                 FutureBuilder<List<Customer>>(
-                    future: customerController.getData(txtTimKiem.text),
+                    future: Get.put(CustomerController()).getData(txtTimKiem.text),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -166,7 +168,6 @@ class _CustomerPageState extends State<CustomerPage> {
               ])),
             ],
           ),
-        ),
       ),
     ));
   }

@@ -31,14 +31,15 @@ dependencies:
     sdk: flutter
   #format number
   intl: ^0.17.0
-  # prodiver de quan ly state
-  provider: ^6.0.2
+  # su dung getX de quan ly state
+  get: ^4.6.1
   #ve bieu do`
   syncfusion_flutter_charts: ^19.4.54
   #hinh anh? theo dang svg
   flutter_svg: ^1.0.3
   #database tai local
   sqflite: ^2.0.1
+  #ve cai' timeline giao hang`
   timelines: ^0.1.0
 
   # The following adds the Cupertino Icons font to your application.

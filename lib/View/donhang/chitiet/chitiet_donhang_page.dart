@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_quanly/all_page.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+
+import '../../../Widgets/build_widgets.dart';
+import '../../../Widgets/process_timeline.dart';
+import '../donhang_controller.dart';
 
 class ChiTietDonHangPage extends StatefulWidget {
   const ChiTietDonHangPage({Key? key}) : super(key: key);
@@ -142,7 +144,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                                 children: [
                                   Text(formatNumber.format(10000) + " VNĐ", style: const TextStyle(fontWeight: FontWeight.bold)),
                                   const Spacer(),
-                                  Text("Số lượng: 99", style: const TextStyle(fontWeight: FontWeight.bold))
+                                  const Text("Số lượng: 99", style: TextStyle(fontWeight: FontWeight.bold))
                                 ],
                               )
                             ],
@@ -165,7 +167,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                     child: Center(
                         child: ElevatedButton(
                             onPressed: () {
-                              Provider.of<DonHangController>(context, listen: false).chuyenTiepTrangThai();
+                              Get.put(DonHangController()).chuyenTiepTrangThai();
                             },
                             child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.85,
