@@ -36,6 +36,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 ? IconButton(
                     onPressed: () {
                       widget.txtTimKiem.clear();
+                      widget.onChanged("");
                     },
                     icon: const Icon(Icons.close))
                 : null,
