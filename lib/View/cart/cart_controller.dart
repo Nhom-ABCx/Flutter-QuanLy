@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_quanly/routes.dart';
 import 'package:get/get.dart';
 
 import '../../Model/customer.dart';
 import '../../Model/product.dart';
+import '../../pages.dart';
 
 class CartController extends GetxController {
   RxList<Product> lstCartProduct = <Product>[].obs;

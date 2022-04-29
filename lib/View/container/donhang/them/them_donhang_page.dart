@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quanly/Model/customer.dart';
 import 'package:flutter_quanly/View/cart/cart_controller.dart';
+import 'package:flutter_quanly/Widgets/build_widgets.dart';
+import 'package:flutter_quanly/pages.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../../Model/customer.dart';
-import '../../../Widgets/build_widgets.dart';
-import '../../customer/customer_page.dart';
-import '../chitiet/chitiet_donhang_page.dart';
 
 class ThemDonHangPage extends StatefulWidget {
   const ThemDonHangPage({Key? key}) : super(key: key);
@@ -178,12 +176,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                               : cartController.customer.value.customerName! + " - " + cartController.customer.value.customerMobile!,
                           style: const TextStyle(color: Colors.blue)),
                       onTap: () async {
-                        final result = await Navigator.push(
-                          context,
-                          MaterialPageRoute<Customer>(
-                            builder: (context) => const CustomerPage(),
-                          ),
-                        );
+                        final result = await Get.toNamed<Customer>(Routes.CUSTOMER);
                         if (result == null) return;
                         cartController.customer.value = result;
                       },
@@ -241,6 +234,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                       ),
                     ]),
                   ),
+                  //gan' cai' height nay` trung` voi' height bottom sheet de no' ko bi mat' widget
                   const SizedBox(height: 110)
                 ])),
               ],
@@ -257,14 +251,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                           trailing: Text(formatNumber.format(cartController.tongTien.value) + " VNĐ"),
                         )),
                     ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) => const ChiTietDonHangPage(),
-                            ),
-                          );
-                        },
+                        onPressed: () => Get.toNamed(Routes.DONHANG + Routes.CHITIETDONHANG),
                         child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.85,
                             child: const Text(

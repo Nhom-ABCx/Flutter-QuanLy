@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quanly/routes.dart';
 import 'package:get/get.dart';
+
+import '../../../pages.dart';
 
 class DonHangPage extends StatefulWidget {
   const DonHangPage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _DonHangPageState extends State<DonHangPage> {
             width: MediaQuery.of(context).size.width,
             height: 100,
             child: TextButton(
-                onPressed: () => Get.toNamed(Routes.THEMDONHANG),
+                onPressed: () => Get.toNamed(Routes.DONHANG+Routes.THEMDONHANG),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: const [

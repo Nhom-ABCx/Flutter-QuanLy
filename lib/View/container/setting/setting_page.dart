@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../Widgets/build_widgets.dart';
+import '../../../Widgets/build_widgets.dart';
 
-class LayOutPage2 extends StatefulWidget {
-  const LayOutPage2({Key? key}) : super(key: key);
+
+class SettingPage extends StatefulWidget {
+  const SettingPage({Key? key}) : super(key: key);
   @override
-  State<LayOutPage2> createState() => _LayOutPage2State();
+  State<SettingPage> createState() => _SettingPageState();
 }
 
-class _LayOutPage2State extends State<LayOutPage2> {
+class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(

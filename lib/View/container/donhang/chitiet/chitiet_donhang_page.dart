@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quanly/View/cart/cart_controller.dart';
+import 'package:flutter_quanly/Widgets/build_widgets.dart';
+import 'package:flutter_quanly/Widgets/process_timeline.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../../Widgets/build_widgets.dart';
-import '../../../Widgets/process_timeline.dart';
-import '../../cart/cart_controller.dart';
 import '../donhang_controller.dart';
 
 class ChiTietDonHangPage extends StatefulWidget {

@@ -1,13 +1,11 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'pages.dart';
-import 'routes.dart';
 
 void main() {
   //chinh cai' mau` cua nen` pin
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.green));
+  //SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.green));
   runApp(const MyApp());
 }
 // SystemChrome.setSystemUIOverlayStyle(
@@ -25,7 +23,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFFEEEEEE),
           primarySwatch: Colors.green,
         ),
-        initialRoute: Routes.CONTAINER,
-        getPages: routePages,
+        initialRoute: Pages.initPage,
+        getPages: Pages.getPages,
       );
 }

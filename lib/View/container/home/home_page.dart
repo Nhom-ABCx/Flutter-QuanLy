@@ -1,9 +1,10 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../Model/sales.dart';
+import '../../../Model/sales.dart';
 import 'home_controller.dart';
 import 'package:get/get.dart';
-import '../../Widgets/build_widgets.dart';
+import '../../../Widgets/build_widgets.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -22,7 +23,7 @@ class HomePage extends GetView<HomeController> {
               sliver: SliverList(
                   delegate: SliverChildListDelegate([
                 Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: Get.mediaQuery.size.width,
                   decoration: customContainerDeco(),
                   child: ListTile(
                     title: const Text("Thời gian"),
@@ -92,11 +93,14 @@ class HomePage extends GetView<HomeController> {
                 //phan` nay` la` tham khao tu` giao dien, build theo de danh` phat trien? do` an'
                 Container(
                   margin: const EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width,
+                  width: Get.mediaQuery.size.width,
                   decoration: customContainerDeco(),
                   child: Column(
                     children: [
-                      const Text("Thông tin kho"),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text("Thông tin kho"),
+                      ),
                       const ListTile(
                         title: Text("Sản phẩm dưới định mức"),
                         trailing: Text("0"),
@@ -114,7 +118,7 @@ class HomePage extends GetView<HomeController> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width,
+                  width: Get.mediaQuery.size.width,
                   decoration: customContainerDeco(),
                   child: SfCartesianChart(
                       primaryXAxis: CategoryAxis(),
@@ -134,9 +138,32 @@ class HomePage extends GetView<HomeController> {
                             dataLabelSettings: const DataLabelSettings(isVisible: true))
                       ]),
                 ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  width: Get.mediaQuery.size.width,
+                  decoration: customContainerDeco(),
+                  child: Column(
+                    children: [
+                      const ListTile(
+                        title: Text("Hàng bán chạy"),
+                        subtitle: Text("Theo số lượng"),
+                        trailing: Icon(Icons.more_horiz),
+                      ),
+                      const Divider(),
+                      ...List.generate(
+                          10,
+                          (index) => ListTile(
+                                leading:
+                                    CircleAvatar(child: Text("$index"), backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)]),
+                                title: Text("Tên sản phẩm $index"),
+                                subtitle: Text("Số lượng: ${index * index * 2}"),
+                              )),
+                    ],
+                  ),
+                )
               ])),
             ),
-            //giuu lai de xem
+            // giuu lai de xem
             // SliverToBoxAdapter(
             //   child: Container(
             //     height: 100.0,

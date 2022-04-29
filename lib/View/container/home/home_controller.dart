@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quanly/View/product/product_controller.dart';
 import 'package:get/get.dart';
 
-import '../../API/api_manager.dart';
-import '../../Model/sales.dart';
-import '../../Model/sellout.dart';
+import '../../../API/api_manager.dart';
+import '../../../Model/sales.dart';
+import '../../../Model/sellout.dart';
 
 class HomeController extends GetxController {
   DateTimeRange dateTimeRange = DateTimeRange(

@@ -33,6 +33,10 @@ class ContainerPage extends GetView<ContainerController> {
                   icon: Icon(Icons.inventory),
                   label: 'Sản phẩm',
                 ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  label: 'Cài đặt',
+                ),
               ],
             ),
           )),
