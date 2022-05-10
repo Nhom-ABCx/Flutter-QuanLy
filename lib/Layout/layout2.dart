@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../Widgets/build_widgets.dart';
 
@@ -21,7 +22,7 @@ class _LayOutPage2State extends State<LayOutPage2> {
           sliver: SliverList(
               delegate: SliverChildListDelegate([
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: Get.width,
               decoration: customContainerDeco(),
               child: const Text("aa"),
             ),

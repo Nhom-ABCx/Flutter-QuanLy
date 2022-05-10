@@ -56,7 +56,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                       ? GestureDetector(
                           onTap: () => cartController.chuyenDenTrangProduct(context),
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
+                            width: Get.width,
                             child: Column(
                               children: [
                                 Opacity(
@@ -69,7 +69,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                                 ),
                                 Container(
                                   margin: const EdgeInsets.all(10),
-                                  //constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                                  //constraints: BoxConstraints(maxWidth: Get.width),
                                   child: const Text(
                                     "Đơn hàng của bạn chưa có sản phẩm nào, nhấn để thêm sản phẩm !",
                                     textAlign: TextAlign.center,
@@ -91,7 +91,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(15.0)),
                             ),
-                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                            constraints: BoxConstraints(maxWidth: Get.width),
                             child: Row(
                               children: [
                                 Container(
@@ -121,7 +121,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                                               style: const TextStyle(fontWeight: FontWeight.bold)),
                                           const Spacer(),
                                           SizedBox(
-                                            width: MediaQuery.of(context).size.width / 3,
+                                            width: Get.width / 3,
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
@@ -150,7 +150,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                         ),
                   Container(
                     color: Colors.white,
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: ListTile(
                       title: const Text("Tổng số lượng"),
                       trailing: Text(cartController.tongSoLuong.value.toString()),
@@ -158,7 +158,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                   ),
                   Container(
                     color: Colors.white,
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: ListTile(
                       title: const Text("Tổng tiền"),
                       trailing: Text(formatNumber.format(cartController.tongTien.value) + " VNĐ"),
@@ -167,7 +167,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                   const Divider(),
                   Container(
                     color: Colors.white,
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: ListTile(
                       leading: const Icon(Icons.person),
                       title: Text(
@@ -184,7 +184,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                   ),
                   Container(
                     color: Colors.white,
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: ListTile(
                       leading: const Icon(Icons.money),
                       title: const Text("Giá bán lẻ"),
@@ -194,7 +194,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                   const Divider(),
                   Container(
                     color: Colors.white,
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       ListTile(
                         leading: const Icon(Icons.edit),
@@ -217,7 +217,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                                     ),
                                     actions: [
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width,
+                                        width: Get.width,
                                         child: ElevatedButton(
                                           onPressed: () => Navigator.of(context).pop(txtTenController.text),
                                           child: const Text("Thêm"),
@@ -243,7 +243,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
             onClosing: () {},
             builder: (context) => Container(
                   color: Colors.green[100],
-                  width: MediaQuery.of(context).size.width,
+                  width: Get.width,
                   height: 110,
                   child: Column(children: [
                     Obx(() => ListTile(
@@ -253,7 +253,7 @@ class _ThemDonHangPageState extends State<ThemDonHangPage> {
                     ElevatedButton(
                         onPressed: () => Get.toNamed(Routes.DONHANG + Routes.CHITIETDONHANG),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.85,
+                            width: Get.width * 0.85,
                             child: const Text(
                               "Lập hóa đơn",
                               textAlign: TextAlign.center,

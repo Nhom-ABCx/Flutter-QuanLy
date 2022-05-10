@@ -22,17 +22,16 @@ class _DonHangPageState extends State<DonHangPage> {
             delegate: SliverChildListDelegate([
           Container(
             margin: const EdgeInsets.all(10),
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             height: 100,
             child: TextButton(
-                onPressed: () => Get.toNamed(Routes.DONHANG+Routes.THEMDONHANG),
+                onPressed: () => Get.toNamed(Routes.DONHANG + Routes.THEMDONHANG),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: const [
                     Icon(Icons.add),
                     Text(
                       "Tạo hóa đơn",
-                      style: TextStyle(color: Colors.black),
                     )
                   ],
                 ),
@@ -43,7 +42,7 @@ class _DonHangPageState extends State<DonHangPage> {
           ),
           Container(
             color: Colors.white,
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             child: ListTile(
               leading: const Icon(Icons.business),
               title: const Text("Danh sách đơn hàng"),
@@ -52,7 +51,7 @@ class _DonHangPageState extends State<DonHangPage> {
           ),
           Container(
             color: Colors.white,
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             child: ListTile(
               leading: const Icon(Icons.undo),
               title: const Text("Khách trả hàng"),

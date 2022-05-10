@@ -117,7 +117,7 @@ class _ProductPageState extends State<ProductPage> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.all(Radius.circular(15.0)),
                                     ),
-                                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                                    constraints: BoxConstraints(maxWidth: Get.width),
                                     child: Row(
                                       children: [
                                         Container(

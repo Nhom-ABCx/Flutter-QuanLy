@@ -37,7 +37,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                           opacity: 0.5,
                           child: SvgPicture.asset(
                             "assets/svgIcons/banner.svg",
-                            width: MediaQuery.of(context).size.width,
+                            width: Get.width,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -116,7 +116,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(15.0)),
                           ),
-                          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                          constraints: BoxConstraints(maxWidth: Get.width),
                           child: Row(
                             children: [
                               Container(
@@ -165,7 +165,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                 onClosing: () {},
                 builder: (context) => Container(
                       color: Colors.green[100],
-                      width: MediaQuery.of(context).size.width,
+                      width: Get.width,
                       height: 50,
                       child: Center(
                           child: ElevatedButton(
@@ -173,7 +173,7 @@ class _ChiTietDonHangPageState extends State<ChiTietDonHangPage> {
                                 Get.put(DonHangController()).chuyenTiepTrangThai();
                               },
                               child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.85,
+                                  width: Get.width * 0.85,
                                   child: const Text(
                                     "Chuyển tiếp trạng thái",
                                     textAlign: TextAlign.center,

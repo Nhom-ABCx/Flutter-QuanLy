@@ -86,7 +86,7 @@ class _CustomerPageState extends State<CustomerPage> {
                                       )),
                                   actions: [
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width,
+                                      width: Get.width,
                                       child: ElevatedButton(
                                         onPressed: () {
                                           //neu' du lieu nhap dung'

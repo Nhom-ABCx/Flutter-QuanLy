@@ -2,6 +2,7 @@ import 'package:flutter_quanly/View/container/donhang/chitiet/chitiet_donhang_pa
 import 'package:flutter_quanly/View/container/donhang/donhang_binding.dart';
 import 'package:flutter_quanly/View/container/donhang/donhang_page.dart';
 import 'package:flutter_quanly/View/container/donhang/them/them_donhang_page.dart';
+import 'package:flutter_quanly/View/container/setting/setting_binding.dart';
 import 'package:flutter_quanly/View/customer/customer_page.dart';
 import 'package:flutter_quanly/View/product/product_binding.dart';
 import 'View/container/container_binding.dart';
@@ -22,6 +23,7 @@ class Pages {
       bindings: [
         ContainerBinding(),
         HomeBinding(),
+        SettingBinding(),
       ],
     ),
     GetPage(name: Routes.DONHANG, page: () => const DonHangPage(), binding: DonHangBinding(), children: [

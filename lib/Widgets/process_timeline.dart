@@ -48,7 +48,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
     return GetBuilder<DonHangController>(
         init: DonHangController(),
         builder: (donHangController) => Container(
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             height: 100,
             color: Colors.white,
             child: Timeline.tileBuilder(
@@ -62,7 +62,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
               builder: TimelineTileBuilder.connected(
                 itemCount: _processes.length,
                 connectionDirection: ConnectionDirection.before,
-                itemExtentBuilder: (_, __) => MediaQuery.of(context).size.width / _processes.length,
+                itemExtentBuilder: (_, __) => Get.width / _processes.length,
                 oppositeContentsBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 15.0),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../Widgets/build_widgets.dart';
-
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _SettingPageState extends State<SettingPage> {
           sliver: SliverList(
               delegate: SliverChildListDelegate([
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: Get.width,
               decoration: customContainerDeco(),
               child: const Text("aa"),
             ),

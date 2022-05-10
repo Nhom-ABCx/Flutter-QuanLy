@@ -31,7 +31,7 @@ class HomePage extends GetView<HomeController> {
                         "${DateFormat('dd/MM/yyyy').format(controller.dateTimeRange.start)} - ${DateFormat('dd/MM/yyyy').format(controller.dateTimeRange.end)}"),
                     trailing: IconButton(
                       iconSize: 30,
-                      icon: const Icon(Icons.date_range, color: Colors.blue),
+                      icon: const Icon(Icons.date_range),
                       onPressed: () async {
                         final result = await showDateRangePicker(
                           context: context,
@@ -54,7 +54,6 @@ class HomePage extends GetView<HomeController> {
                           title: const Text("Doanh thu"),
                           subtitle: Text(
                             formatNumber.format(controller.tongDoanhThu.value) + " VNĐ",
-                            style: const TextStyle(color: Colors.green),
                           ),
                           trailing: const Icon(Icons.money),
                         )),
@@ -64,7 +63,6 @@ class HomePage extends GetView<HomeController> {
                           title: const Text("Số đơn hàng"),
                           subtitle: Text(
                             "${controller.tongSoDonHang}",
-                            style: const TextStyle(color: Colors.green),
                           ),
                           trailing: const Icon(Icons.shopping_cart),
                         )),
@@ -74,7 +72,6 @@ class HomePage extends GetView<HomeController> {
                           title: Text("Đã hủy"),
                           subtitle: Text(
                             "0",
-                            style: TextStyle(color: Colors.green),
                           ),
                           trailing: Icon(Icons.dangerous_rounded),
                         )),
@@ -84,7 +81,6 @@ class HomePage extends GetView<HomeController> {
                           title: const Text("Khách hàng"),
                           subtitle: Text(
                             "${controller.tongKhachHang}",
-                            style: const TextStyle(color: Colors.green),
                           ),
                           trailing: const Icon(Icons.people),
                         )),

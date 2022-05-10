@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quanly/Config/theme.dart';
 import 'package:get/get.dart';
 
 import 'pages.dart';
@@ -18,11 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false, //tat cai' debug tren appbar
         title: 'Quan Ly Ban Hang',
-        theme: ThemeData(
-          //brightness: Brightness.dark, //che'do toi' hay sang'
-          scaffoldBackgroundColor: const Color(0xFFEEEEEE),
-          primarySwatch: Colors.green,
-        ),
+        theme: ThemeConfig.lightTheme,
         initialRoute: Pages.initPage,
         getPages: Pages.getPages,
       );
